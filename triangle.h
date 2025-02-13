@@ -28,11 +28,18 @@ public:
 
 
 
-// Functions
+// Functions without arguments
   void print() const;
   point centroid();
   double area();
-  std::vector<double> normal();
+  point surface_normal();
+
+
+// Functions with arguments
+
 };
+
+
+
 
 #endif //TRIANGLE_H

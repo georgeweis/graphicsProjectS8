@@ -23,9 +23,9 @@ void triangle::print() const
 
 point triangle::centroid()
 {
-  double x_cent = (p0.coords()[0] + p1.coords()[0] + p2.coords()[0])/3;
-  double y_cent = (p0.coords()[1] + p1.coords()[1] + p2.coords()[1])/3;
-  double z_cent = (p0.coords()[2] + p1.coords()[2] + p2.coords()[2])/3;
+  double x_cent = (p0.components()[0] + p1.components()[0] + p2.components()[0])/3;
+  double y_cent = (p0.components()[1] + p1.components()[1] + p2.components()[1])/3;
+  double z_cent = (p0.components()[2] + p1.components()[2] + p2.components()[2])/3;
 
   point pCentroid = point(x_cent, y_cent, z_cent);
 
@@ -43,11 +43,14 @@ double triangle::area()
   double area = std::sqrt(s*(s-a)*(s-b)*(s-c));
 
   return area;
-
 }
 
-std::vector<double> normal()
+point triangle::surface_normal()
 {
-  
+  point a = p0.vector_to(p1);
+  point b = p0.vector_to(p2);
+  point cross = a.cross_product(b);
+  cross.normalise();
+  return cross;
 }
 

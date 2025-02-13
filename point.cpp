@@ -42,10 +42,34 @@ std::tuple<double, double, double> point::cartesian_to_spherical() const {
     return std::make_tuple(r, theta, phi);
 }
 
-std::vector<double> point::coords() const {
+std::vector<double> point::components() const {
     return {this->x, this->y, this->z};  // Accessing member variables directly
 }
 
+point point::normalise() const
+{
+  // creates a new point (vector) which is normalised 
+  double magnitude = std::sqrt(x*x + y*y + z*z);
+  double x_norm = x/magnitude;
+  double y_norm = y/magnitude;
+  double z_norm = z/magnitude;
+  point normalised_vector = point(x_norm, y_norm, z_norm);
+
+  return normalised_vector;
+}
+
+void point::normalise()
+{
+  // normalises the point by changing member variables (no const)
+  double magnitude = std::sqrt(x*x + y*y + z*z);
+  if (magnitude != 0) { // Prevent division by zero
+    x /= magnitude;
+    y /= magnitude;
+    z /= magnitude;
+  }
+
+
+}
 
 
 
@@ -58,25 +82,16 @@ double point::distance_to(const point& other) const {
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-std::vector<double> point::vector_to(const point& other)
+point point::vector_to(const point& other)
 {
   double dx = other.x - x;
   double dy = other.y - y;
   double dz = other.z - z;
 
-  std::vector<double> vec_to;
-  vec_to.push_back(dx);
-  vec_to.push_back(dy);
-  vec_to.push_back(dz);
+  point vec_to = point(dx, dy, dz);
 
   return vec_to;
 
-}
-
-bool same_point(const point& other)
-{
-  //update this when we get clarification from stewart. 
-  return false;
 }
 
 double point::dot_product(const point& other) const{

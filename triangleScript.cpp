@@ -1,6 +1,6 @@
 //triangle script 
 /*
-run: 
+run on Georges: 
 /opt/homebrew/bin/g++-11 -std=c++17 -fdiagnostics-color=always -g point.cpp triangleScript.cpp triangle.cpp -o triangleScript.o
 
 */
@@ -22,6 +22,8 @@ int main()
 
   triangle t2 = triangle(p0,p1,p2);
 
+  triangle t3 = triangle(point(1,0,0), point(0,1,0), point(0,0,1));
+
   //printing coordinates of vertices
   t1.print();
   t2.print();
@@ -30,16 +32,25 @@ int main()
   point p_cent = t2.centroid();
 
   //printing coordinates of the centroid point of 
-  std::cout<<"Centroid of t2:"<<std::endl;
+  std::cout<<"\nCentroid of t2:"<<std::endl;
   for (int i=0; i<3; i++)
   {
-    std::cout<<"p_cent.coords()["<<i<<"]: "<<p_cent.coords()[i]<<std::endl;
+    std::cout<<"p_cent.coords()["<<i<<"]: "<<p_cent.components()[i]<<std::endl;
   }
 
-  std::cout<<"p0.distance_to(p1)"<< p0.distance_to(p1)<<std::endl;
+  std::cout<<"\np0.distance_to(p1): "<< p0.distance_to(p1)<<std::endl;
+
+  std::cout<<"\nt2.area(): "<< t2.area()<<std::endl;
+
+  point t2_surface_normal = t2.surface_normal();
+  std::cout<<"\nt2.surface_normal(): "<<std::endl;
+  t2_surface_normal.print();
+  point t3_surface_normal = t3.surface_normal();
+  std::cout<<"t3.surface_normal(): "<<std::endl;
+  t3_surface_normal.print();
 
 
-  std::cout<<"t2.area()"<< t2.area()<<std::endl;
+  
 }
 
 

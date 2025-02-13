@@ -29,16 +29,19 @@ public:
 // Functions without arguments 
   double distance_to_origin();
   std::tuple<double, double, double> cartesian_to_spherical() const;
-  std::vector<double> coords() const;
+  std::vector<double> components() const;
+  point normalise() const;
+  void normalise();
+
 
 // Functions with arguments
   double distance_to(const point& other) const;
-  std::vector<double> vector_to(const point& other);
-  bool same_point(const point& other);
-  
+  point vector_to(const point& other);
+
   double dot_product(const point& other) const;
 
   point cross_product(const point& other) const;
+
 
 };
 

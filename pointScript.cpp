@@ -36,13 +36,14 @@ int main()
     std::cout << "Azimuth (phi, radians): " << phi << std::endl;
 
 
-std::vector<double> vec = p1.coords();
+std::vector<double> vec = p1.components();
 
 std::cout << "(" << vec[0] << ", " << vec[1] << ", " << vec[2] << ")\n";
 
 
-std::vector<double> v = p1.vector_to(p2);
-std::cout<<"Vector from p1->p2: ["<<v[0]<<','<<v[1]<<','<<v[2]<<']'<<std::endl;
+point vector_p1_p2 = p1.vector_to(p2);
+std::cout<<"Vector from p1->p2:"<<std::endl;
+vector_p1_p2.print();
 
 std::cout << "Dot Product: " << p1.dot_product(p2) << std::endl;
 
