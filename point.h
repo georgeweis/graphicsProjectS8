@@ -36,7 +36,13 @@ public:
   std::vector<double> vector_to(const point& other);
   bool same_point(const point& other);
   
+  double dot_product(const point& other) const;
+
+  point cross_product(const point& other) const;
+
 };
+
+
 
 
 

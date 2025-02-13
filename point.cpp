@@ -79,5 +79,13 @@ bool same_point(const point& other)
   return false;
 }
 
+double point::dot_product(const point& other) const{
+  return x * other.x + y * other.y + z * other.z;
+}
 
-
+point point::cross_product(const point& other) const {
+  double cross_x = y * other.z - z * other.y;
+  double cross_y = z * other.x - x * other.z;
+  double cross_z = x * other.y - y * other.x;
+  return point(cross_x, cross_y, cross_z);
+}

@@ -3,6 +3,7 @@
 to run on Georges:
 /opt/homebrew/bin/g++-11 -std=c++17 -fdiagnostics-color=always -g pointScript.cpp  point.cpp -o pointScript.o
 
+To run on Pablo's: /usr/local/bin/g++-11 -std=c++17 -fdiagnostics-color=always -g pointScript.cpp point.cpp -o pointScript.o
 
 */
 #include<iostream>
@@ -42,4 +43,16 @@ std::cout << "(" << vec[0] << ", " << vec[1] << ", " << vec[2] << ")\n";
 
 std::vector<double> v = p1.vector_to(p2);
 std::cout<<"Vector from p1->p2: ["<<v[0]<<','<<v[1]<<','<<v[2]<<']'<<std::endl;
+
+std::cout << "Dot Product: " << p1.dot_product(p2) << std::endl;
+
+  
+point cross = p1.cross_product(p2);
+cross.print();
+
+
 }
+
+
+
+
