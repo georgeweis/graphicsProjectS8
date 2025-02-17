@@ -13,6 +13,23 @@ triangle::~triangle()
   // std::cout<<"Destroying triangle"<<std::endl;
 } 
 
+
+
+//functions without arguments
+point triangle::get_p0()
+{
+  return p0;
+}
+point triangle::get_p1()
+{
+  return p1;
+}
+point triangle::get_p2()
+{
+  return p2;
+}
+
+
 void triangle::print() const
 {
   std::cout << "Triangle vertices:\n";
@@ -53,4 +70,14 @@ point triangle::surface_normal()
   cross.normalise();
   return cross;
 }
+
+bool triangle::is_valid()
+{
+  return area()>0;
+}
+
+
+// Functions with arguments
+
+
 

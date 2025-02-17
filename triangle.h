@@ -29,10 +29,18 @@ public:
 
 
 // Functions without arguments
+  point get_p0();
+  point get_p1();
+  point get_p2();
+
   void print() const;
   point centroid();
   double area();
   point surface_normal();
+  bool is_valid();
+
+
+
 
 
 // Functions with arguments

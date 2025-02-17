@@ -49,6 +49,8 @@ int main()
   std::cout<<"t3.surface_normal(): "<<std::endl;
   t3_surface_normal.print();
 
+  std::cout<<"t2.is_valid(): "<<t1.is_valid()<<std::endl;
+
 
   
 }
