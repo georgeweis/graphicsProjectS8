@@ -36,14 +36,11 @@ public:
   void print() const;
   point centroid();
   double area();
-  point surface_normal();
+  point normal();
   bool is_valid();
 
-
-
-
-
 // Functions with arguments
+
 
 };
 

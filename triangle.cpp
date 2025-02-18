@@ -3,31 +3,20 @@
 
 #include "triangle.h"
 
-
+// Constructor
 triangle::triangle(const point& pt0, const point& pt1, const point& pt2)
   : p0(pt0), p1(pt1), p2(pt2) {}
 
 
-triangle::~triangle()
-{
-  // std::cout<<"Destroying triangle"<<std::endl;
-} 
+// Desrtuctor
+triangle::~triangle(){} 
 
 
 
 //functions without arguments
-point triangle::get_p0()
-{
-  return p0;
-}
-point triangle::get_p1()
-{
-  return p1;
-}
-point triangle::get_p2()
-{
-  return p2;
-}
+point triangle::get_p0(){return p0;}
+point triangle::get_p1(){return p1;}
+point triangle::get_p2(){return p2;}
 
 
 void triangle::print() const
@@ -62,7 +51,7 @@ double triangle::area()
   return area;
 }
 
-point triangle::surface_normal()
+point triangle::normal()
 {
   point a = p0.vector_to(p1);
   point b = p0.vector_to(p2);
@@ -71,10 +60,7 @@ point triangle::surface_normal()
   return cross;
 }
 
-bool triangle::is_valid()
-{
-  return area()>0;
-}
+bool triangle::is_valid(){return area()>1e-10;}
 
 
 // Functions with arguments

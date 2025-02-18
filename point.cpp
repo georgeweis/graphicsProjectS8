@@ -6,7 +6,7 @@
 #include "point.h"
 #include <vector>
 
-
+double point::default_epsilon = 1e-6; 
 // Parameterized constructor:
 point::point(const double& xIn, const double& yIn, const double& zIn)
   : x{xIn}, y{yIn}, z{zIn} {}
@@ -27,10 +27,14 @@ void point::print () const
   return;
 }
 
-double point::distance_to_origin()
+double point::get_x() const {return x;}
+double point::get_y() const {return y;}
+double point::get_z() const {return z;}
+
+double point::magnitude() const
 {
   double magnitude_squared = x*x + y*y + z*z;
-    double distance_to_origin = std::sqrt(magnitude_squared);
+  double distance_to_origin = std::sqrt(magnitude_squared);
   return distance_to_origin;
 }
 
@@ -58,6 +62,9 @@ point point::normalise() const
   return normalised_vector;
 }
 
+
+
+
 void point::normalise()
 {
   // normalises the point by changing member variables (no const)
@@ -67,10 +74,21 @@ void point::normalise()
     y /= magnitude;
     z /= magnitude;
   }
-
-
 }
 
+
+bool point::is_equal_within_tolerance(const point& other, double epsilon) const {
+    if (epsilon == 0) {
+        epsilon = default_epsilon; // Use default tolerance if epsilon is 0
+    }
+    return (std::fabs(x - other.x) < epsilon) &&
+           (std::fabs(y - other.y) < epsilon) &&
+           (std::fabs(z - other.z) < epsilon);
+}
+
+void point::set_default_tolerance(double new_epsilon) {
+    default_epsilon = new_epsilon; // Set new default tolerance
+}
 
 
 
@@ -94,13 +112,33 @@ point point::vector_to(const point& other)
 
 }
 
-double point::dot_product(const point& other) const{
+double point::dot_product(const point& other) const
+{
   return x * other.x + y * other.y + z * other.z;
 }
 
-point point::cross_product(const point& other) const {
+point point::cross_product(const point& other) const 
+{
   double cross_x = y * other.z - z * other.y;
   double cross_y = z * other.x - x * other.z;
   double cross_z = x * other.y - y * other.x;
   return point(cross_x, cross_y, cross_z);
+}
+
+double point::angle_between_vecs_rads(const point& other) const
+{
+
+  double dot_prod_ab = dot_product(other);
+  double magnitude_a = magnitude();
+  double magnitude_b = other.magnitude();
+  double cos_theta = dot_prod_ab/(magnitude_a*magnitude_b);
+  double angle = std::acos(cos_theta);
+  return angle;
+}
+
+point point::operator+(const point& other) const
+{
+  point result(x + other.x, y + other.y, z+other.z);
+  return result;
+
 }
