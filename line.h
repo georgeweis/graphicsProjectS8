@@ -34,15 +34,18 @@ public:
   double get_l() const;
 
   point end_point() const;
+  point midpoint() const;
   void print() const;
   double change_in_x() const;
   double change_in_y() const;
   double change_in_z() const;
 
+  
 
   // Functions with arguments
+  bool is_parallel(const line& other_line) const;
+  bool includes_point(const point& p) const;
 
-  bool is_perpendiclar(const line& other) const;
 
 
   /*

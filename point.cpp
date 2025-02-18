@@ -24,7 +24,7 @@ point::~point()
 void point::print () const
 {
   std::cout.precision(3); // 2 significant figures
-  std::cout<<"Coordinates: [x,y,z] = ["<<x<<","<< y<<","<<z<<"]"<<std::endl;
+  std::cout<<"components: [x,y,z] = ["<<x<<","<< y<<","<<z<<"]"<<std::endl;
   return;
 }
 
@@ -51,7 +51,7 @@ std::vector<double> point::components() const {
     return {this->x, this->y, this->z};  // Accessing member variables directly
 }
 
-point point::normalise() const
+point point::make_normal() const
 {
   // creates a new point (vector) which is normalised 
   double magnitude = std::sqrt(x*x + y*y + z*z);
@@ -94,8 +94,6 @@ bool point::is_equal_within_tolerance(const point& other, double epsilon) const 
 void point::set_default_tolerance(double new_epsilon) {
   default_epsilon = new_epsilon; // Set new default tolerance
 }
-
-
 
 
 double point::distance_to(const point& other) const {

@@ -38,7 +38,7 @@ public:
   double magnitude() const;
   std::tuple<double, double, double> cartesian_to_spherical() const;
   std::vector<double> components() const;
-  point normalise() const;
+  point make_normal() const;
   void normalise();
 
   

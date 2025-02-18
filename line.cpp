@@ -9,12 +9,12 @@
 #include "point.h"
 
 
-// Parameterized constructor:
+// Parameterized constructor
 line::line(const point& p0In, const point& nIn, const double& lIn )
-  : p0{p0In}, n{nIn.normalise()}, l{lIn} {}
+  : p0{p0In}, n{nIn.make_normal()}, l{lIn} {}
 
 
-// Destructor:
+// Destructor
 line::~line(){} 
 
 
@@ -28,12 +28,13 @@ point line::end_point() const
 {
   return p0 + n*l;
 }
+point line::midpoint() const {return p0 + n*(l/2.0);}
 
 void line::print() const
 {
-  std::cout<<"p0";
+  std::cout<<"p0 ";
   p0.print();
-  std::cout<<"n";
+  std::cout<<"n ";
   n.print();
   std::cout<<"l = "<<l<<std::endl;
 }
@@ -46,5 +47,31 @@ double line::change_in_z() const {return (n*l).get_z();}
 
 
 
-// Functions with arguments 
 
+// Functions with arguments
+
+bool line::is_parallel(const line& other_line) const
+{
+  double angle_between_lines = n.angle_between_vecs_rads(other_line.n);
+  return angle_between_lines<1e-5;
+}
+
+bool line::includes_point(const point& p) const
+{
+  if (p0.is_equal_within_tolerance(p))
+  {
+    return true; // no need for further calc if p0=p
+  }
+
+
+  point v = p0.vector_to(p); //vector from p0 to point p
+  point v_norm = v.make_normal();
+  if (n.is_equal_within_tolerance(v_norm) 
+      && v.magnitude()<=l)
+  {
+    //only enter if v is parallel to line normal and if
+    //magnitude is smaller than length of the line
+    return true;
+  }
+  return false;
+}
