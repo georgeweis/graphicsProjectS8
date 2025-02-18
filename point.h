@@ -51,7 +51,7 @@ public:
 
 
   double distance_to(const point& other) const;
-  point vector_to(const point& other);
+  point vector_to(const point& other) const;
 
   double dot_product(const point& other) const;
 
@@ -60,9 +60,9 @@ public:
   double angle_between_vecs_rads(const point& other) const;
 
   point operator+(const point& other) const;
+  point operator*(const double& scalar) const;
 
-
-
+  
 };
 
 

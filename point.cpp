@@ -6,7 +6,8 @@
 #include "point.h"
 #include <vector>
 
-double point::default_epsilon = 1e-6; 
+
+
 // Parameterized constructor:
 point::point(const double& xIn, const double& yIn, const double& zIn)
   : x{xIn}, y{yIn}, z{zIn} {}
@@ -77,22 +78,26 @@ void point::normalise()
 }
 
 
+// Functions with arguments
+
+double point::default_epsilon = 1e-6; 
+
 bool point::is_equal_within_tolerance(const point& other, double epsilon) const {
-    if (epsilon == 0) {
-        epsilon = default_epsilon; // Use default tolerance if epsilon is 0
-    }
-    return (std::fabs(x - other.x) < epsilon) &&
-           (std::fabs(y - other.y) < epsilon) &&
-           (std::fabs(z - other.z) < epsilon);
+  if (epsilon == 0) {
+    epsilon = default_epsilon; // Use default tolerance if epsilon is 0
+  }
+  return (std::fabs(x - other.x) < epsilon) &&
+          (std::fabs(y - other.y) < epsilon) &&
+          (std::fabs(z - other.z) < epsilon);
 }
 
 void point::set_default_tolerance(double new_epsilon) {
-    default_epsilon = new_epsilon; // Set new default tolerance
+  default_epsilon = new_epsilon; // Set new default tolerance
 }
 
 
 
-// Functions with arguments
+
 double point::distance_to(const point& other) const {
   double dx = x - other.x;
   double dy = y - other.y;
@@ -100,7 +105,7 @@ double point::distance_to(const point& other) const {
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-point point::vector_to(const point& other)
+point point::vector_to(const point& other) const
 {
   double dx = other.x - x;
   double dy = other.y - y;
@@ -139,6 +144,13 @@ double point::angle_between_vecs_rads(const point& other) const
 point point::operator+(const point& other) const
 {
   point result(x + other.x, y + other.y, z+other.z);
+  return result;
+
+}
+
+point point::operator*(const double& scalar) const
+{
+  point result(x*scalar, y*scalar, z*scalar);
   return result;
 
 }

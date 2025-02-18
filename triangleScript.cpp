@@ -42,10 +42,10 @@ int main()
 
   std::cout<<"\nt2.area(): "<< t2.area()<<std::endl;
 
-  point t2_surface_normal = t2.surface_normal();
+  point t2_surface_normal = t2.normal();
   std::cout<<"\nt2.surface_normal(): "<<std::endl;
   t2_surface_normal.print();
-  point t3_surface_normal = t3.surface_normal();
+  point t3_surface_normal = t3.normal();
   std::cout<<"t3.surface_normal(): "<<std::endl;
   t3_surface_normal.print();
 
