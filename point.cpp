@@ -39,7 +39,7 @@ double point::magnitude() const
   return distance_to_origin;
 }
 
-std::tuple<double, double, double> point::cartesian_to_spherical() const {
+std::tuple<double, double, double> point::to_spherical() const {
     double r = std::sqrt(x * x + y * y + z * z);
     double theta = (r != 0) ? std::acos(z / r) : 0; // Avoid division by zero
     double phi = std::atan2(y, x);
@@ -150,5 +150,10 @@ point point::operator*(const double& scalar) const
 {
   point result(x*scalar, y*scalar, z*scalar);
   return result;
+}
 
+point point::operator-(const point& other) const
+{
+  point result = vector_to(other);
+  return result;
 }

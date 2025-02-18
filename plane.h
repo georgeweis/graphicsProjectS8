@@ -2,9 +2,12 @@
 #ifndef PLANE_H
 #define PLANE_H
 
-#include "point.h"
+
 #include <vector>
 #include <iostream>
+
+#include "point.h"
+#include "line.h"
 
 class plane
 {
@@ -28,7 +31,14 @@ public:
 
     void print_equation() const;
 
-     bool point_lies_on_plane(const point& p, double tolerance = 1e-6) const;
+    bool point_lies_on_plane(const point& p, double tolerance = 1e-6) const;
+
+    bool intersects_with(const plane& other) const;
+
+    double angle_between_in_rads(const plane& other) const;
+
+    line line_intersection_with(const plane& other) const;
+
 
 
 };

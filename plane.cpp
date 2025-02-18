@@ -11,7 +11,7 @@ plane::~plane() {
 
 
 plane::plane(const point& normal, const point& point_on_plane)
-    : normal(normal), point_on_plane(point_on_plane) {}
+    : normal(normal.make_normal()), point_on_plane(point_on_plane) {}
 
 point plane::get_normal() const {
     return normal;
@@ -57,4 +57,30 @@ bool plane::point_lies_on_plane(const point& p, double tolerance) const {
     // If the distance is less than the tolerance, the point lies on the plane
     return distance < tolerance;
 }
+
+bool plane::intersects_with(const plane& other) const{
+
+    point cross_product_two_normals;
+
+    cross_product_two_normals = normal.cross_product(other.get_normal());
+// cross product = 0 means parallel
+    return !(cross_product_two_normals.is_equal_within_tolerance(point(0, 0, 0)));  
+
+}
+
+double plane::angle_between_in_rads(const plane& other) const
+{
+double dot_product_between_normals = normal.dot_product(other.get_normal());
+double magnitude1 = normal.magnitude();
+double magnitude2 = other.get_normal().magnitude();
+// cos_theta = (n_1 dot n_2)/ (mag_n1*mag_n2)
+return std::acos(dot_product_between_normals / (magnitude1 * magnitude2));
+}
+
+line plane::line_intersection_with(const plane& other) const {
+//direction of line
+point direction_of_line = normal.cross_product(other.get_normal());
+//finding a point of intersection
+
+
 

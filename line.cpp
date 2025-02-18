@@ -52,8 +52,7 @@ double line::change_in_z() const {return (n*l).get_z();}
 
 bool line::is_parallel(const line& other_line) const
 {
-  double angle_between_lines = n.angle_between_vecs_rads(other_line.n);
-  return angle_between_lines<1e-5;
+  return n.is_equal_within_tolerance(other_line.get_n());
 }
 
 bool line::includes_point(const point& p) const
@@ -75,3 +74,21 @@ bool line::includes_point(const point& p) const
   }
   return false;
 }
+
+  bool line::intersects_plane(const plane& plane_)
+  {
+    //checks if normals are the same
+    return n.is_equal_within_tolerance(plane_.get_normal());
+  }
+
+  point line::point_of_intersection(const plane& plane_)
+  {
+    point n_l = n;
+    point n_p = plane_.get_normal();
+    point p_f = plane_.get_point_on_plane();
+
+    double lam = (p_f - p0).dot_product(n_p);
+
+    point p_intersection = n_l*lam +p0;
+    return p_intersection;
+  }

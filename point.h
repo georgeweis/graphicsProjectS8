@@ -36,7 +36,7 @@ public:
   double get_z() const;
 
   double magnitude() const;
-  std::tuple<double, double, double> cartesian_to_spherical() const;
+  std::tuple<double, double, double> to_spherical() const;
   std::vector<double> components() const;
   point make_normal() const;
   void normalise();
@@ -61,8 +61,7 @@ public:
 
   point operator+(const point& other) const;
   point operator*(const double& scalar) const;
-
-  
+  point operator-(const point& other) const;
 };
 
 

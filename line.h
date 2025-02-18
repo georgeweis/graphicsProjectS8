@@ -8,6 +8,7 @@
 #include<cmath>
 
 #include "point.h"
+#include "plane.h"
 
 class line
 {
@@ -45,6 +46,8 @@ public:
   // Functions with arguments
   bool is_parallel(const line& other_line) const;
   bool includes_point(const point& p) const;
+  bool intersects_plane(const plane& plane_);
+  point point_of_intersection(const plane& plane_);
 
 
 
@@ -54,9 +57,7 @@ public:
   bool is_perpendiclar(const line& other); //allow precision
   point intersects_plane(const pane& plane); //add after plane class 
 
-
-
-*/
+ */
 
 
 
