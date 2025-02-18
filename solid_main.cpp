@@ -22,5 +22,8 @@ int main()
     apex_of_pyramid.print();
     std::cout << std::endl;
 
+    double area = pyramid.surface_area();
+    std::cout << "\nSurface area of the pyramid: " << area << std::endl;
+
    return 0;
 }

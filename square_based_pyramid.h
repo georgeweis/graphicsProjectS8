@@ -24,9 +24,12 @@ class  square_based_pyramid {
     std::vector<point> get_base_points() const;
 
     point get_apex_point() const;
+
+    std::vector<triangle> split_base() const; 
+
     ~square_based_pyramid(); 
 
-
+    double surface_area() const;
 };
 
 #endif
