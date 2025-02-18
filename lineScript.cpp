@@ -32,7 +32,7 @@ int main()
   point point1 = point(-1,0,0);
   std::cout<<"line1.includes_point(point1): "<<line1.includes_point(point1)<<std::endl;
 
-  // 
+  //   //
 
 
 
