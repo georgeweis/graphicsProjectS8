@@ -2,16 +2,16 @@
 
 #include <iostream>
 #include <cmath>
-#include <tuple>
 #include <vector>
 
 #include "line.h"
 #include "point.h"
+#include "plane.h"
 
 
 // Parameterized constructor
 line::line(const point& p0In, const point& nIn, const double& lIn )
-  : p0{p0In}, n{nIn.make_normal()}, l{lIn} {}
+  : p0{p0In}, n_l{nIn.make_normal()}, length{lIn} {}
 
 
 // Destructor
@@ -21,27 +21,27 @@ line::~line(){}
 
 // Funcitons without arguments
 point line::get_p0() const {return p0;}
-point line::get_n() const {return n;}
-double line::get_l() const {return l;}
+point line::get_n_l() const {return n_l;}
+double line::get_length() const {return length;}
 
 point line::end_point() const
 {
-  return p0 + n*l;
+  return p0 + n_l*length;
 }
-point line::midpoint() const {return p0 + n*(l/2.0);}
+point line::midpoint() const {return p0 + n_l*(length/2.0);}
 
 void line::print() const
 {
   std::cout<<"p0 ";
   p0.print();
-  std::cout<<"n ";
-  n.print();
-  std::cout<<"l = "<<l<<std::endl;
+  std::cout<<"n_l ";
+  n_l.print();
+  std::cout<<"length = "<<length<<std::endl;
 }
 
-double line::change_in_x() const {return (n*l).get_x();}
-double line::change_in_y() const {return (n*l).get_y();}
-double line::change_in_z() const {return (n*l).get_z();}
+double line::change_in_x() const {return (n_l*length).get_x();}
+double line::change_in_y() const {return (n_l*length).get_y();}
+double line::change_in_z() const {return (n_l*length).get_z();}
 
 
 
@@ -52,7 +52,7 @@ double line::change_in_z() const {return (n*l).get_z();}
 
 bool line::is_parallel(const line& other_line) const
 {
-  return n.is_equal_within_tolerance(other_line.get_n());
+  return n_l.is_equal_within_tolerance(other_line.get_n_l());
 }
 
 bool line::includes_point(const point& p) const
@@ -65,8 +65,8 @@ bool line::includes_point(const point& p) const
 
   point v = p0.vector_to(p); //vector from p0 to point p
   point v_norm = v.make_normal();
-  if (n.is_equal_within_tolerance(v_norm) 
-      && v.magnitude()<=l)
+  if (n_l.is_equal_within_tolerance(v_norm) 
+      && v.magnitude()<=length)
   {
     //only enter if v is parallel to line normal and if
     //magnitude is smaller than length of the line
@@ -75,20 +75,19 @@ bool line::includes_point(const point& p) const
   return false;
 }
 
-  bool line::intersects_plane(const plane& plane_)
+  bool line::intersects_plane(const plane& plane_0) const
   {
-    //checks if normals are the same
-    return n.is_equal_within_tolerance(plane_.get_normal());
+    double nl_dot_np = n_l.dot_product(plane_0.get_normal()) ;
+    return std::fabs(nl_dot_np)>1e-6; // intersects if dot prod!=0
   }
 
-  point line::point_of_intersection(const plane& plane_)
+  point line::point_of_intersection_with_plane(const plane& plane_0) const
   {
-    point n_l = n;
-    point n_p = plane_.get_normal();
-    point p_f = plane_.get_point_on_plane();
-
-    double lam = (p_f - p0).dot_product(n_p);
-
-    point p_intersection = n_l*lam +p0;
-    return p_intersection;
+    point p_p = plane_0.get_point_on_plane(); //the "anchor" point of the plane
+    point n_p = plane_0.get_normal(); // normal of plane
+    double denom = (p_p - p0).dot_product(n_p); 
+    double numerator = n_l.dot_product(n_p);
+    double length_at_intersec = denom/numerator;
+    point point_of_intersec = p0+(n_l*length_at_intersec);
+    return point_of_intersec;
   }
