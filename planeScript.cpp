@@ -23,6 +23,7 @@ point normal(1, 2, 3);
 point p5(1, 0, 0);  // A point on the plane
 plane pl(normal, p5);
 pl.print_equation();
+pl.print_plane_equation();
 
 point p6(3, 2, 1);
 double distance = pl.distance_to_point(p6);
