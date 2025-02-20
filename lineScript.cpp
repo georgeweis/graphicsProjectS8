@@ -5,7 +5,7 @@ g++-11 -std=c++17 -fdiagnostics-color=always -g lineScript.cpp line.cpp point.cp
 
 To run on Pablo's: /usr/local/bin/g++-11 -std=c++17 -fdiagnostics-color=always -g pointScript.cpp point.cpp -o pointScript.o
 
-*/
+*/ //
 #include<iostream>
 #include "point.h"
 #include "line.h"
