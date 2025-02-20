@@ -32,11 +32,7 @@ int main()
   point point1 = point(-1,0,0);
   std::cout<<"line1.includes_point(point1): "<<line1.includes_point(point1)<<std::endl;
 
-<<<<<<< HEAD
-  //   //
-=======
   //testing intersection with plane functions
->>>>>>> origin/main
 
   //define line
   point p0_3=point(0,0,-1);
