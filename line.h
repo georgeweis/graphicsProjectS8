@@ -10,12 +10,14 @@
 #include "point.h"
 #include "plane.h"
 
+class plane;  // Forward declaration of plane class
+
 class line
 {
 private:
   point p0 ; //starting point
-  point n ; // normalised direction 
-  double l; //length
+  point n_l ; // normalised direction 
+  double length; //length
 
 public:
 
@@ -31,8 +33,8 @@ public:
 
   // Functions without arguments
   point get_p0() const;
-  point get_n() const;
-  double get_l() const;
+  point get_n_l() const;
+  double get_length() const;
 
   point end_point() const;
   point midpoint() const;
@@ -46,8 +48,8 @@ public:
   // Functions with arguments
   bool is_parallel(const line& other_line) const;
   bool includes_point(const point& p) const;
-  bool intersects_plane(const plane& plane_);
-  point point_of_intersection(const plane& plane_);
+  bool intersects_plane(const plane& plane_0) const;
+  point point_of_intersection_with_plane(const plane& plane_0) const;
 
 
 

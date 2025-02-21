@@ -28,7 +28,7 @@ int main()
 
   std::cout << "Distance from p2 to p1: " << p1.distance_to(p2) << std::endl;
 
-  auto [r, theta, phi] = p1.cartesian_to_spherical();
+  auto [r, theta, phi] = p1.to_spherical();
 
   std::cout << "Spherical coordinates: \n";
   std::cout << "Radius (r): " << r << "\n";
