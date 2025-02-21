@@ -154,6 +154,7 @@ point point::operator*(const double& scalar) const
 
 point point::operator-(const point& other) const
 {
-  point result = vector_to(other);
+  point result = point(x-other.x, y-other.y, z-other.z);
   return result;
 }
+ 
