@@ -14,9 +14,9 @@ triangle::~triangle(){}
 
 
 //functions without arguments
-point triangle::get_p0(){return p0;}
-point triangle::get_p1(){return p1;}
-point triangle::get_p2(){return p2;}
+point triangle::get_p0() const {return p0;} 
+point triangle::get_p1() const {return p1;} 
+point triangle::get_p2() const {return p2;} 
 
 
 void triangle::print() const
@@ -27,7 +27,7 @@ void triangle::print() const
   p2.print();
 }
 
-point triangle::centroid()
+point triangle::centroid() const
 {
   double x_cent = (p0.components()[0] + p1.components()[0] + p2.components()[0])/3;
   double y_cent = (p0.components()[1] + p1.components()[1] + p2.components()[1])/3;
@@ -38,7 +38,7 @@ point triangle::centroid()
   return pCentroid;
 }
 
-double triangle::area()
+double triangle::area() const
 {
   double a = p0.distance_to(p1);
   double b = p0.distance_to(p2);
@@ -51,7 +51,7 @@ double triangle::area()
   return area;
 }
 
-point triangle::normal()
+point triangle::normal() const
 {
   point a = p0.vector_to(p1);
   point b = p0.vector_to(p2);
@@ -60,7 +60,7 @@ point triangle::normal()
   return cross;
 }
 
-bool triangle::is_valid(){return area()>1e-10;}
+bool triangle::is_valid() const {return area()>1e-10;} 
 
 
 // Functions with arguments
