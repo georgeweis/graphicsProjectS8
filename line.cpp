@@ -91,3 +91,45 @@ bool line::includes_point(const point& p) const
     point point_of_intersec = p0+(n_l*length_at_intersec);
     return point_of_intersec;
   }
+
+
+bool line::intersects_with_triangle(const triangle& tri) const
+{
+    // getting plane of the triangle
+    point tri_normal = tri.normal();
+    plane tri_plane = plane(tri_normal , tri.get_p0()); // create a plane 
+
+    // checking if line and plane intersect
+    if (intersects_plane(tri_plane) == false) {return false;}
+
+    //finding point of intersection with plane
+    point intersection = point_of_intersection_with_plane(tri_plane);
+
+    // computing barycentric coordinates
+    point A = tri.get_p0();
+    point B = tri.get_p1();
+    point C = tri.get_p2();
+
+    point v0 = C - A;
+    point v1 = B - A;
+    point v2 = intersection - A;
+
+    double d00 = v0.dot_product(v0);
+    double d01 = v0.dot_product(v1);
+    double d11 = v1.dot_product(v1);
+    double d20 = v2.dot_product(v0);
+    double d21 = v2.dot_product(v1);
+
+    double denom = d00 * d11 - d01 * d01;
+    double u = (d11 * d20 - d01 * d21) / denom;
+    double v = (d00 * d21 - d01 * d20) / denom;
+    double w = 1.0 - u - v;
+
+    //checking if the point is inside the triangle
+    if ((u >= 0 && u <= 1) && (v >= 0 && v <= 1) && (w >= 0 && w <= 1))
+    {
+      return true;
+    }
+    return false;
+
+}

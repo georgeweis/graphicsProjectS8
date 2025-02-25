@@ -29,15 +29,15 @@ public:
 
 
 // Functions without arguments
-  point get_p0();
-  point get_p1();
-  point get_p2();
+  point get_p0() const;
+  point get_p1() const;
+  point get_p2() const;
 
   void print() const;
-  point centroid();
-  double area();
-  point normal();
-  bool is_valid();
+  point centroid() const;
+  double area() const;
+  point normal() const;
+  bool is_valid() const;
 
 // Functions with arguments
 
