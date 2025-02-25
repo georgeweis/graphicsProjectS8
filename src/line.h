@@ -9,23 +9,23 @@
 
 #include "point.h"
 #include "plane.h"
-#include "triangle.h"
+
 
 class plane;  // Forward declaration of plane class
+class triangle;
 
 class line
 {
 private:
   point p0 ; //starting point
-  point n_l ; // normalised direction 
-  double length; //length
+  point n_l ; // normalised direction
 
 public:
 
   // Default constructor
   line() = default ;
   // Parameterized constructor
-  line(const point& p0In, const point& nIn, const double& lIn ) ;
+  line(const point& p0In, const point& nIn ) ;
 
   // Destructor
   ~line();
@@ -35,23 +35,17 @@ public:
   // Functions without arguments
   point get_p0() const;
   point get_n_l() const;
-  double get_length() const;
 
-  point end_point() const;
-  point midpoint() const;
   void print() const;
-  double change_in_x() const;
-  double change_in_y() const;
-  double change_in_z() const;
 
   
 
   // Functions with arguments
   bool is_parallel(const line& other_line) const;
   bool includes_point(const point& p) const;
-  bool intersects_plane(const plane& plane_0) const;
-  point point_of_intersection_with_plane(const plane& plane_0) const;
-  bool intersects_with_triangle(const triangle& tri) const;
+  bool does_intersect(const plane& plane_0) const;
+  point intersect(const plane& plane_0) const;
+  bool does_intersect(const triangle& tri) const;
 
 
 
@@ -61,7 +55,7 @@ public:
   bool is_perpendiclar(const line& other); //allow precision
   point intersects_plane(const pane& plane); //add after plane class 
 
- */
+  */
 
 
 
