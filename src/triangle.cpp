@@ -104,7 +104,16 @@ bool triangle::does_intersect(const line& l) const
 }
 
 
+std::vector<double> triangle::side_lengths_descending() const {
+  double a = p0.distance_to(p1);
+  double b = p0.distance_to(p2);
+  double c = p1.distance_to(p2);
 
+  std::vector<double> sides = {a, b, c};
+  std::sort(sides.rbegin(), sides.rend()); // Sort in descending order
+
+  return sides;
+}
 
 
 

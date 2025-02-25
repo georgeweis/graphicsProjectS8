@@ -47,6 +47,7 @@ solid solid::load_stl(const std::string& filename) {
 }
 
 
+
 // bool solid::is_inside(const point& p) const {
 //   int intersection_count = 0;
 //

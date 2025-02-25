@@ -41,6 +41,7 @@ public:
   bool is_valid() const;
   bool does_intersect(const line& l) const;
 
+  std::vector<double> side_lengths_descending() const;
   // Functions with arguments
 
 
