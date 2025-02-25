@@ -20,8 +20,8 @@ public:
     solid(std::vector<triangle>);
 
     void print_triangles() const;
-
-    bool is_inside(const point& p) const;
+    // TODO
+    // bool is_inside(const point& p) const;
 
 };
 
