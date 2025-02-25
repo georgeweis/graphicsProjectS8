@@ -56,7 +56,7 @@ int main()
   //testing intersect function
   // defining triangle in xy plane
   point p0t = point(0,0,0);
-  point p1t = point(1,1,0);
+  point p1t = point(1,1,2);
   point p2t = point(1,0,0);
 
   triangle t2t = triangle(p0t,p1t,p2t);
@@ -66,8 +66,12 @@ int main()
   point line_t_point = point(0.5,0.05,2);
   line line_t = line(line_t_point, line_t_normal);
 
+
   std::cout<<"\nt2t.does_intersect(line_t): "<<t2t.does_intersect(line_t)<<std::endl;
 
+  point t_intersection = t2t.intersect(line_t);
+  std::cout<<"\nt2t.intersect(line_t): "<<std::endl;
+  t_intersection.print();
 
 
 
