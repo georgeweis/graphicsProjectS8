@@ -23,3 +23,6 @@ add_executable(planeTest planeTest.cpp)
 target_link_libraries(planeTest functions)
 target_include_directories(planeTest PRIVATE "./src/")
 
+add_executable(solidTest solidTest.cpp square_based_pyramid.cpp)
+target_link_libraries(solidTest functions)
+target_include_directories(solidTest PRIVATE "./src/")
