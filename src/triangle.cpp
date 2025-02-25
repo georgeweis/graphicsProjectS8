@@ -60,7 +60,54 @@ point triangle::normal() const
   return cross;
 }
 
-bool triangle::is_valid() const {return area()>1e-10;} 
+
+bool triangle::is_valid() const {return area()>1e-10;}
+
+bool triangle::does_intersect(const line& l) const
+{
+  // getting plane of the triangle
+  plane tri_plane = plane(normal() , p0); // create a plane
+
+  // checking if line and plane intersect
+  if (l.does_intersect(tri_plane) == false) {return false;}
+
+  //finding point of intersection with plane
+  point intersection = l.intersect(tri_plane);
+
+  // computing barycentric coordinates
+  point A = p0;
+  point B = p1;
+  point C = p2;
+
+  point v0 = C - A;
+  point v1 = B - A;
+  point v2 = intersection - A;
+
+  double d00 = v0.dot_product(v0);
+  double d01 = v0.dot_product(v1);
+  double d11 = v1.dot_product(v1);
+  double d20 = v2.dot_product(v0);
+  double d21 = v2.dot_product(v1);
+
+  double denom = d00 * d11 - d01 * d01;
+  double u = (d11 * d20 - d01 * d21) / denom;
+  double v = (d00 * d21 - d01 * d20) / denom;
+  double w = 1.0 - u - v;
+
+  //checking if the point is inside the triangle
+  double epsilon = -1e-10;
+  if ((u >= epsilon && u <= 1) && (v >= epsilon && v <= 1) && (w >= epsilon && w <= 1))
+  {
+    return true;
+  }
+  return false;
+}
+
+
+
+
+
+
 
 
 // Functions with arguments
