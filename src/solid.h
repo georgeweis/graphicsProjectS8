@@ -1,5 +1,3 @@
-// 
-
 #ifndef SOLID_H
 #define SOLID_H
 #include "point.h"
@@ -11,17 +9,24 @@ class solid
 {
 
 private:
-    std::vector<triangle> triangles;  
+  std::vector<triangle> triangles;
 
 public:
 
-    solid() = default ;
+  solid() = default ;
+  solid(std::vector<triangle>);
 
-    solid(std::vector<triangle>);
+  /* is the point inside or outside the solid */
+  //bool is_inside(const point& p) const;
 
-    void print_triangles() const;
-    // TODO
-    // bool is_inside(const point& p) const;
+  static solid load_stl(const std::string& filename);
+
+  const std::vector<triangle>& get_triangles() const { return triangles; }
+
+  /* print all triangles to std::cout */
+  void print_triangles() const;
+
+  void print_triangle_areas() const;
 
 };
 
