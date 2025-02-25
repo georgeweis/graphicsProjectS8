@@ -9,6 +9,7 @@ To run on Pablo's: /usr/local/bin/g++-11 -std=c++17 -fdiagnostics-color=always -
 #include<iostream>
 #include "point.h"
 #include "line.h"
+#include "triangle.h"
 
 int main()
 {
@@ -38,7 +39,7 @@ int main()
   point p0_3=point(0,0,-1);
   point n_3=point(0,0,1);
   double l_3=4;
-  line line3 = line(p0_3, n_3, l_3);
+  line line3 = line(p0_3, n_3);
 
   //define plane
   point n_plane1 = point(1,0,0); 
@@ -48,9 +49,9 @@ int main()
 
   //output
   std::cout<<"plane1 intersects with line3"<<std::endl;
-  std::cout<<"line3.intersects_plane(plane1): "<<line3.intersects_plane(plane1)<<std::endl;
+  std::cout<<"line3.intersects_plane(plane1): "<<line3.does_intersect(plane1)<<std::endl;
   std::cout<<"\nPoint of intersection of plane1 with line1:"<<std::endl;
-  point line3_plane1_intersection = line3.point_of_intersection_with_plane(plane1);
+  point line3_plane1_intersection = line3.intersect(plane1);
   line3_plane1_intersection.print();
 
 
