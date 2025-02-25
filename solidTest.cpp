@@ -30,8 +30,8 @@ int main()
 
   std::string filename = "liver.stl";
 
-  solid s = solid::load_stl("/Users/pablomooney/Documents/Year 4/S8Project/graphicsProjectS8_git_backup/liver.stl");
-  solid heart = solid::load_stl("/Users/pablomooney/Documents/Year 4/S8Project/graphicsProjectS8_git_backup/liver.stl");
+  solid s = solid::load_stl("liver.stl");
+  solid heart = solid::load_stl("heart.stl");
 
 
   //Check if the solid is successfully loaded
