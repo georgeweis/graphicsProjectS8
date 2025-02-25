@@ -103,7 +103,16 @@ bool triangle::does_intersect(const line& l) const
   return false;
 }
 
+point triangle::intersect(const line& l)
+{
+  // getting plane of the triangle
+  plane tri_plane = plane(normal() , p0); // create a plane
 
+  //finding point of intersection with plane
+  point intersection = l.intersect(tri_plane);
+
+  return intersection;
+}
 std::vector<double> triangle::side_lengths_descending() const {
   double a = p0.distance_to(p1);
   double b = p0.distance_to(p2);

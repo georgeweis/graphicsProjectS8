@@ -40,6 +40,7 @@ public:
   point normal() const;
   bool is_valid() const;
   bool does_intersect(const line& l) const;
+  point intersect(const line& l);
 
   std::vector<double> side_lengths_descending() const;
   // Functions with arguments
