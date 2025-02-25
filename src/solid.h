@@ -5,6 +5,8 @@
 #include "point.h"
 #include "triangle.h"
 
+class point;
+
 class solid
 {
 
