@@ -1,7 +1,7 @@
 //point script 
 /*
 to run on Georges:
-g++-11 -std=c++17 -fdiagnostics-color=always -g lineScript.cpp line.cpp point.cpp plane.cpp -o lineScript.o
+g++-11 -std=c++17 -fdiagnostics-color=always -g lineScript.cpp triangle.cpp line.cpp point.cpp plane.cpp -o lineScript.o
 
 To run on Pablo's: /usr/local/bin/g++-11 -std=c++17 -fdiagnostics-color=always -g pointScript.cpp point.cpp -o pointScript.o
 
@@ -52,6 +52,29 @@ int main()
   std::cout<<"\nPoint of intersection of plane1 with line1:"<<std::endl;
   point line3_plane1_intersection = line3.point_of_intersection_with_plane(plane1);
   line3_plane1_intersection.print();
+
+
+
+
+
+  // testing intersection with triangle function
+
+  // defining triangle in xy plane
+  point p0t = point(0,0,0);
+  point p1t = point(1,1,0);
+  point p2t = point(1,0,0);
+
+  triangle t2 = triangle(p0t,p1t,p2t);
+
+  // defining line in z direction
+  point line_t_normal = point(0,0,1);
+  point line_t_point = point(0,0.05,-1);
+  line line_t = line(line_t_point, line_t_normal, 5.0);
+
+  std::cout<<"\nline_t.intersects_with_triangle(t2): "<<line_t.intersects_with_triangle(t2)<<std::endl;
+  
+
+
 
 
 }
