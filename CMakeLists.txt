@@ -23,3 +23,7 @@ add_executable(planeTest planeTest.cpp)
 target_link_libraries(planeTest functions)
 target_include_directories(planeTest PRIVATE "./src/")
 
+add_executable(triangleTest triangleTest.cpp)
+target_link_libraries(triangleTest functions)
+target_include_directories(triangleTest PRIVATE "./src/")
+
