@@ -52,6 +52,25 @@ int main()
   std::cout<<"t2.is_valid(): "<<t2.is_valid()<<std::endl;
 
 
+
+  //testing intersect function
+  // defining triangle in xy plane
+  point p0t = point(0,0,0);
+  point p1t = point(1,1,0);
+  point p2t = point(1,0,0);
+
+  triangle t2t = triangle(p0t,p1t,p2t);
+
+  // defining line in z direction
+  point line_t_normal = point(0,0,-1);
+  point line_t_point = point(0.5,0.05,2);
+  line line_t = line(line_t_point, line_t_normal);
+
+  std::cout<<"\nt2t.does_intersect(line_t): "<<t2t.does_intersect(line_t)<<std::endl;
+
+
+
+
   
 }
 
