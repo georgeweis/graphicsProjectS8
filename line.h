@@ -1,4 +1,4 @@
-// line class
+
 #ifndef LINE_H
 #define LINE_H
 
@@ -9,10 +9,8 @@
 
 #include "point.h"
 #include "plane.h"
-#include "triangle.h"
 
 class plane;  // Forward declaration of plane class
-class triangle; //Forward declaration of triangle class
 
 class line
 {
@@ -52,7 +50,6 @@ public:
   bool includes_point(const point& p) const;
   bool intersects_plane(const plane& plane_0) const;
   point point_of_intersection_with_plane(const plane& plane_0) const;
-  bool intersects_with_triangle(const triangle& tri) const;
 
 
 
