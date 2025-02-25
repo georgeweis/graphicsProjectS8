@@ -1,5 +1,6 @@
 #include "square_based_pyramid.h"
 #include "point.h"
+#include "triangle.h"
 int main()
 {
 
