@@ -28,32 +28,32 @@ int main() {
 
     std::string filename = "liver.stl";
 
-    solid s = solid::load_stl("liver.stl");
+    solid liver = solid::load_stl("liver.stl");
     solid heart = solid::load_stl("heart.stl");
 
-    // Check if the solid is successfully loaded
     if (heart.get_triangles().empty()) {
         std::cerr << "Error: No triangles loaded. Check the STL file or loading function." << std::endl;
         return 1;
     }
 
-    // Print the triangles in the solid
-    heart.print_triangles();
-
-    std::cout << "heart" << std::endl;
-    heart.print_triangle_areas();
-
     std::vector<triangle> heart_triangles = heart.get_triangles();
-    std::cout << "\nTriangles in the heart solid:\n";
+    /*std::cout << "\nTriangles in the heart solid:\n";
     for (const auto& t : heart_triangles) {
         t.print();
-    }
+    }*/
 
     // Generate and output CSV statistics
     std::string csv_output = heart.triangle_statistics_csv();
-    std::cout << csv_output;
+    /*std::cout << csv_output;*/
 
     heart.export_triangle_statistics_csv("heart_triangles.csv");
+
+    std::cout << "Volume of the heart: " << heart.volume() << " cubic units" << std::endl;
+    std::cout << "SA of the heart: " << heart.surface_area() << " square units" << std::endl;
+    std::cout << "Volume of the liver: " << liver.volume() << " cubic units" << std::endl;
+    std::cout << "SA of the liver: " << liver.surface_area() << " square units" << std::endl;
+
+
 
     return 0;
 }

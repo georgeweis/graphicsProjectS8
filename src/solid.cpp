@@ -106,3 +106,32 @@ void solid::export_triangle_statistics_csv(const std::string& filename) const {
         std::cerr << "Error: Unable to open file for writing!" << std::endl;
     }
 }
+
+double solid::volume() const {
+double totalVolume = 0.0;
+
+for (const auto& tri : triangles) {
+
+    point A = tri.get_p0();
+    point B = tri.get_p1();
+    point C = tri.get_p2();
+
+    double v = (1.0 / 6.0) * (
+        A.components()[0] * (B.components()[1] * C.components()[2] - B.components()[2] * C.components()[1]) +
+        B.components()[0] * (C.components()[1] * A.components()[2] - C.components()[2] * A.components()[1]) +
+        C.components()[0] * (A.components()[1] * B.components()[2] - A.components()[2] * B.components()[1])
+    );
+
+    totalVolume += v;
+}
+
+return std::abs(totalVolume);
+}
+
+double solid::surface_area() const {
+    double totalArea = 0.0;
+    for (const auto& t : triangles) {
+        totalArea += t.area();
+    }
+    return totalArea;
+}

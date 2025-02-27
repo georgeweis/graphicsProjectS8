@@ -32,6 +32,11 @@ public:
 
   void export_triangle_statistics_csv(const std::string& filename) const;
 
+  double volume() const;
+
+  double surface_area() const;
+
+
 };
 
 #endif
