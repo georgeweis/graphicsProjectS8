@@ -30,3 +30,11 @@ target_include_directories(triangleTest PRIVATE "./src/")
 add_executable(solidTest solidTest.cpp square_based_pyramid.cpp)
 target_link_libraries(solidTest functions)
 target_include_directories(solidTest PRIVATE "./src/")
+
+add_executable(lineSegmentTest lineSegmentTest.cpp)
+target_link_libraries(lineSegmentTest functions)
+target_include_directories(lineSegmentTest PRIVATE "./src/")
+
+
+
+

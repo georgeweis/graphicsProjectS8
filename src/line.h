@@ -20,6 +20,8 @@ private:
   point p0 ; //starting point
   point n_l ; // normalised direction
 
+  friend class lineSegment;
+
 public:
 
   // Default constructor
