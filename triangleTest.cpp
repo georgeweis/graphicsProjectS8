@@ -73,7 +73,13 @@ int main()
   std::cout<<"\nt2t.intersect(line_t): "<<std::endl;
   t_intersection.print();
 
+  std::vector<double> sides = t2t.side_lengths_descending();
 
+  std::cout << "Side lengths in descending order: ";
+  for (double side : sides) {
+    std::cout << side << " ";
+  }
+  std::cout << std::endl;
 
   
 }

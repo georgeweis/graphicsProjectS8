@@ -47,6 +47,7 @@ solid solid::load_stl(const std::string& filename) {
 }
 
 
+
 // bool solid::is_inside(const point& p) const {
 //   int intersection_count = 0;
 //
@@ -78,4 +79,59 @@ void solid::print_triangle_areas() const {
     for (size_t i = 0; i < triangles.size(); ++i) {
         std::cout << "Triangle " << i + 1 << " area: " << triangles[i].area() << "\n";
     }
+}
+
+
+std::string solid::triangle_statistics_csv() const {
+    std::stringstream ss;
+    ss << "Triangle,Longest Side,Medium Side,Shortest Side,Area\n";
+
+    for (size_t i = 0; i < triangles.size(); ++i) {
+        std::vector<double> sides = triangles[i].side_lengths_descending();
+        double area = triangles[i].area();
+
+        ss << i + 1 << "," << sides[0] << "," << sides[1] << "," << sides[2] << "," << area << "\n";
+    }
+
+    return ss.str();
+}
+
+void solid::export_triangle_statistics_csv(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << triangle_statistics_csv();  // Write the CSV data to the file
+        file.close();
+        std::cout << "CSV file successfully saved as '" << filename << "'" << std::endl;
+    } else {
+        std::cerr << "Error: Unable to open file for writing!" << std::endl;
+    }
+}
+
+double solid::volume() const {
+double totalVolume = 0.0;
+
+for (const auto& tri : triangles) {
+
+    point A = tri.get_p0();
+    point B = tri.get_p1();
+    point C = tri.get_p2();
+
+    double v = (1.0 / 6.0) * (
+        A.components()[0] * (B.components()[1] * C.components()[2] - B.components()[2] * C.components()[1]) +
+        B.components()[0] * (C.components()[1] * A.components()[2] - C.components()[2] * A.components()[1]) +
+        C.components()[0] * (A.components()[1] * B.components()[2] - A.components()[2] * B.components()[1])
+    );
+
+    totalVolume += v;
+}
+
+return std::abs(totalVolume);
+}
+
+double solid::surface_area() const {
+    double totalArea = 0.0;
+    for (const auto& t : triangles) {
+        totalArea += t.area();
+    }
+    return totalArea;
 }
