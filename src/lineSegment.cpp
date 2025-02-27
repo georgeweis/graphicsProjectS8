@@ -50,16 +50,20 @@ double lineSegment::calc_intersect_param(const plane& plane_0) const {
         return std::numeric_limits<double>::max();
     }
 
+
     point p_p = plane_0.get_point_on_plane(); //the "anchor" point of the plane
     point n_p = plane_0.get_normal(); // normal of plane
     double num = (p_p - p0).dot_product(n_p);
     double den = nl_dot_np;
     double length_at_intersect = num/den;
 
-    if (length<length_at_intersect) {
-        //returns max double value if line is not long enough to intersect plane
+    if (std::signbit(length) != std::signbit(length_at_intersect)
+        || length<length_at_intersect) {
+        //returns max double value if line points in the wrong direction to intersect or
+        //if it is not long enough to intersect plane
         return std::numeric_limits<double>::max();
     }
+
     return length_at_intersect;
 
 }

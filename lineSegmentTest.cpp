@@ -39,7 +39,7 @@ int main()
     //define line
     point p0_3=point(1,1,-1);
     point n_3=point(0,0,1);
-    double l_3=0.5;
+    double l_3=5;
     lineSegment lineSeg3 = lineSegment(p0_3, n_3, l_3);
 
     //define plane
