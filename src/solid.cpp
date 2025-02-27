@@ -80,3 +80,29 @@ void solid::print_triangle_areas() const {
         std::cout << "Triangle " << i + 1 << " area: " << triangles[i].area() << "\n";
     }
 }
+
+
+std::string solid::triangle_statistics_csv() const {
+    std::stringstream ss;
+    ss << "Triangle,Longest Side,Medium Side,Shortest Side,Area\n";
+
+    for (size_t i = 0; i < triangles.size(); ++i) {
+        std::vector<double> sides = triangles[i].side_lengths_descending();
+        double area = triangles[i].area();
+
+        ss << i + 1 << "," << sides[0] << "," << sides[1] << "," << sides[2] << "," << area << "\n";
+    }
+
+    return ss.str();
+}
+
+void solid::export_triangle_statistics_csv(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << triangle_statistics_csv();  // Write the CSV data to the file
+        file.close();
+        std::cout << "CSV file successfully saved as '" << filename << "'" << std::endl;
+    } else {
+        std::cerr << "Error: Unable to open file for writing!" << std::endl;
+    }
+}
