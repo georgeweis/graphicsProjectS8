@@ -2,6 +2,7 @@
 #define SOLID_H
 #include "point.h"
 #include "triangle.h"
+#include "lineSegment.h"
 
 class point;
 
@@ -35,6 +36,10 @@ public:
   double volume() const;
 
   double surface_area() const;
+
+  bool is_inside(const point& p) const;
+
+
 
 
 };

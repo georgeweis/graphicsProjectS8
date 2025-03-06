@@ -53,7 +53,58 @@ int main() {
     std::cout << "Volume of the liver: " << liver.volume() << " cubic units" << std::endl;
     std::cout << "SA of the liver: " << liver.surface_area() << " square units" << std::endl;
 
+    point test_point(0.0001, 0.0001, 0.0001);  // Choose a point for testing
 
+    if (heart.is_inside(test_point)) {
+        std::cout << "The point is inside the heart." << std::endl;
+    } else {
+        std::cout << "The point is outside the heart." << std::endl;
+    }
+
+    // You can also test with the liver solid if needed
+    if (liver.is_inside(test_point)) {
+        std::cout << "The point is inside the liver." << std::endl;
+    } else {
+        std::cout << "The point is outside the liver." << std::endl;
+    }
+
+
+
+    point p5(0, 0, 0);
+    point p6(1, 0, 0);
+    point p7(0, 1, 0);
+    point p8(0, 0, 1);
+
+    // Manually defining the triangles of the tetrahedron
+    std::vector<triangle> tetrahedron_triangles = {
+        triangle(p5, p6, p7),
+        triangle(p5, p6, p8),
+        triangle(p5, p7, p8),
+        triangle(p6, p7, p8)
+    };
+
+    // Create the solid
+    solid tetrahedron(tetrahedron_triangles);
+
+    // Define a point to test if it is inside the solid
+    point test_point2(0.25, 0.25, 0.25);  // This point is inside the tetrahedron
+
+    // Check if the test point is inside the solid
+    if (tetrahedron.is_inside(test_point2)) {
+        std::cout << "The point is inside the tetrahedron." << std::endl;
+    } else {
+        std::cout << "The point is outside the tetrahedron." << std::endl;
+    }
+
+    // Define another point outside the solid
+    point test_point_outside(1.5, 1.5, 1.5);
+
+    // Check if the test point is inside the solid
+    if (tetrahedron.is_inside(test_point_outside)) {
+        std::cout << "The point is inside the tetrahedron." << std::endl;
+    } else {
+        std::cout << "The point is outside the tetrahedron." << std::endl;
+    }
 
     return 0;
 }

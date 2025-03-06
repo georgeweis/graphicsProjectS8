@@ -1,6 +1,7 @@
 #include "solid.h"
 #include "triangle.h"
 #include "line.h"
+#include "plane.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -134,4 +135,25 @@ double solid::surface_area() const {
         totalArea += t.area();
     }
     return totalArea;
+}
+
+bool solid::is_inside(const point& p) const {
+    int intersection_count = 0;
+
+    // Define the ray's direction along the +X axis
+    point ray_direction(1, 0, 0);  // Ray direction vector along the X axis
+
+    // Create a long ray from point p along the +X direction
+    lineSegment ray(p, ray_direction, 1e6);  // Long ray to ensure it exits the solid
+
+    // Iterate through the triangles of the solid
+    for (const auto& tri : triangles) {
+        // Check if the ray intersects the triangle
+        if (ray.does_intersect(tri)) {
+            intersection_count++;  // Increment intersection count for each hit
+        }
+    }
+
+    // Return true if the intersection count is odd (inside), false if even (outside)
+    return (intersection_count % 2 == 1);  // Odd count means inside, even means outside
 }

@@ -83,7 +83,51 @@ bool lineSegment::does_intersect(const plane& plane_0) const
 
 }
 
+bool lineSegment::does_intersect(const triangle& tri) const
+{
+    // Getting the normal of the triangle and creating the plane of the triangle
+    point tri_normal = tri.normal();
+    plane tri_plane = plane(tri_normal, tri.get_p0());  // Create the plane
 
+    // Checking if the line segment intersects with the plane of the triangle
+    if (does_intersect(tri_plane) == false) {
+        return false;  // If it doesn't intersect with the plane, return false
+    }
+
+    // Finding the point of intersection with the plane
+    point intersection = intersect(tri_plane);
+
+    // Computing the barycentric coordinates
+    point A = tri.get_p0();
+    point B = tri.get_p1();
+    point C = tri.get_p2();
+
+    point v0 = C - A;
+    point v1 = B - A;
+    point v2 = intersection - A;
+
+    double d00 = v0.dot_product(v0);
+    double d01 = v0.dot_product(v1);
+    double d11 = v1.dot_product(v1);
+    double d20 = v2.dot_product(v0);
+    double d21 = v2.dot_product(v1);
+
+    double denom = d00 * d11 - d01 * d01;
+    double u = (d11 * d20 - d01 * d21) / denom;
+    double v = (d00 * d21 - d01 * d20) / denom;
+    double w = 1.0 - u - v;
+
+    // Checking if the point is inside the triangle (barycentric coordinates in the range [0, 1])
+    double epsilon = -1e-10;  // Small tolerance to avoid floating point issues
+    if ((u >= epsilon && u <= 1) && (v >= epsilon && v <= 1) && (w >= epsilon && w <= 1))
+    {
+        // The intersection point lies inside the triangle
+        return true;
+    }
+
+    // The intersection point is outside the triangle
+    return false;
+}
 
 
 

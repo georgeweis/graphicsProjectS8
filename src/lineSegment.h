@@ -7,7 +7,7 @@
 
 #include "point.h"
 #include "line.h"
-
+#include "triangle.h"
 
 class lineSegment : public line {
 private:
@@ -38,6 +38,7 @@ public:
     double calc_intersect_param(const plane& plane_0) const;
     point intersect(const plane& plane_0) const;
     bool does_intersect(const plane& plane_0) const;
+    bool does_intersect(const triangle& tri) const;
 
 
 
